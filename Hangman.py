@@ -107,6 +107,7 @@ def hangman_Game():
 
 
         else:
+            attempts +=1
             print("invalid input. Please enter a letter! (Or guess the whole word if you can!)") #If the letter wasn't already guessed or isnt in the alphabet set, it means it is invalid
     if attempts == 7: 
         print ("you ran out of chances, please play again. The word was:", guess)
