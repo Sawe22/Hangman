@@ -1,0 +1,42 @@
+import random 
+
+import string #Get english uppercase letters
+
+#Gets the variable listofwords from the wordlist.py file
+from wordlist import list_Of_Words
+
+
+#A function which chooses a random word from the word list and returns that word provided it isnt rai or zimmerman
+def is_Acceptable(chosen_Word):
+    word = random.choice(list_Of_Words) #Gets a random word from the list of words, random comes from import random
+    while word == "Rai" or word == "Zimmerman": #Keeps selecting a random word until it isnt rai or zimmerman
+         word = random.choice(list_Of_Words)
+
+    return word.upper() #Returns the word in all caps
+
+def hangman_Game():
+    guess = is_Acceptable(list_Of_Words) #Assigns this variable to an acceptable random word
+    word_letters = set(guess) #makes the random word into a set
+    alphabet = set (string.ascii_uppercase) #Alphabet is a set of uppercase letters, comes from import string
+    guessed_letters = set() #Making an empty set, where already guessed word will go into
+
+
+    while word_letters > 0: #If this variable is not yet zero it means the game is not complete, meaning it should loop on until it is finished
+
+        print ("You have used these letters: ", ' '.join(guessed_letters)) #Turns this list into a string, which is seperated by whatever is before .join
+
+
+
+
+        user_Guess = input ('Pick a letter: ').upper() #Prompts user to choose a letter, which is made into uppercase
+        if user_Guess in alphabet - guessed_letters #Sees if the current user guess is in the set of alphabet letters not including the already guessed letters:
+            guessed_letters.add(user_Guess) #Adds the guessed letters to the guessed letters set
+            if user_Guess in word_letters: #If the letter guessed is in the current letters remaining, remove that letter from the list of letters remaining
+                word_letters.remove(user_Guess)
+        elif user_Guess in guessed_letters: #If the guessed letter is something which was previously guessed, the user is told so 
+            print ("This is an old guess, try something new")
+        else:
+            print("invalid character") #If the letter wasn't already guessed or isnt in the alphabet set, it means it is invalid
+
+    
+
